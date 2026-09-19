@@ -1,41 +1,4 @@
-const CACHE_NAME = 'fuel-app-v1';
-<link rel="manifest" href="/manifest.json">
-
-sel
-  e.waitUntil(
-    caches.open(CACHE_NAME).then((c) => c.addAll(['/', '/index.html', '/manifest.json']))
-  );
-  self.skipWaiting();
-});
-
-self.addEventListener('activate', (e) => {
-  e.waitUntil(self.clients.claim());
-});
-
-self.addEventListener('fetch', (e) => {
-  e.respondWith(
-    fetch(e.request).catch(() => caches.match(e.request))
-  );
-});
-
-
-self.addEventListener('install', (e) => {
-  e.waitUntil(
-    caches.open(CACHE_NAME).then((c) => c.addAll(['/', '/index.html', '/manifest.json']))
-  );
-  self.skipWaiting();
-});
-
-self.addEventListener('activate', (e) => {
-  e.waitUntil(self.clients.claim());
-});
-
-self.addEventListener('fetch', (e) => {
-  e.respondWith(
-    fetch(e.request).catch(() => caches.match(e.request))
-  );
-});
-
+<!DOCTYPE html>
 <html lang="pa">
 <head>
   <meta charset="UTF-8">
@@ -45,32 +8,33 @@ self.addEventListener('fetch', (e) => {
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <li<link rel="manifest" href="/manifest.json">
-
+  <link rel="manifest" href="/manifest.json">
   <style>
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; color: #f8fafc; margin: 0; padding: 12px; }
-    .header { text-align: center; padding: 10px 0 16px 0; border-bottom: 1px solid #1e293b; margin-bottom: 16px; }
+    .header { text-align: center; padding: 10px 0 16px 0; border-bottom: 1px solid #334155; }
     .header h2 { margin: 0; font-size: 20px; color: #38bdf8; }
     .card { background: #1e293b; border-radius: 12px; padding: 16px; margin-bottom: 16px; border: 1px solid #334155; }
-    h3 { margin-top: 0; font-size: 16px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; }
+    h3 { margin-top: 0; font-size: 16px; color: #94a3b8; text-transform: uppercase; }
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     label { font-size: 12px; color: #94a3b8; display: block; margin-bottom: 4px; }
-    input { width: 100%; background: #0f172a; border: 1px solid #475569; color: #f8fafc; padding: 10px; border-radius: 8px; font-size: 15px; }
+    input { width: 100%; background: #0f172a; border: 1px solid #475569; color: #f8fafc; padding: 10px; border-radius: 8px; font-size: 16px; }
     input:focus { border-color: #38bdf8; outline: none; }
-    .btn { width: 100%; padding: 12px; border: none; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .btn { width: 100%; padding: 12px; border: none; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; }
     .btn-main { background: #0284c7; color: white; margin-top: 14px; }
-    .btn-add { background: #334155; color: #38bdf8; border: 1px dashed #0284c7; margin-top: 10px; padding: 10px; }
-    .btn-nav { background: #16a34a; color: white; padding: 8px 12px; font-size: 13px; text-decoration: none; border-radius: 6px; width: auto; display: inline-block; }
-    .pump-card { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 12px; margin-top: 10px; }
+    .btn-add { background: #334155; color: #38bdf8; border: 1px dashed #0284c7; margin-top: 10px; }
+    .btn-nav { background: #16a34a; color: white; padding: 8px 12px; font-size: 13px; border-radius: 6px; text-decoration: none; display: inline-block; }
+    .pump-card { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 12px; margin-bottom: 10px; }
     .pump-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
     .pump-title { font-weight: bold; color: #e2e8f0; font-size: 14px; }
-    .btn-delete { background: none; border: none; color: #ef4444; font-size: 16px; cursor: pointer; padding: 0 4px; }
-    .skip-box { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 13px; color: #fbbf24; }
-    .skip-box input { width: auto; }
-    .stop-card { background: #064e3b; border-left: 5px solid #10b981; border-radius: 8px; padding: 14px; margin-top: 12px; }
-    .stop-badge { background: #10b981; color: #022c22; font-size: 11px; font-weight: 900; padding: 2px 6px; border-radius: 4px; }
-    .warning { background: #7f1d1d; border-left: 5px solid #ef4444; border-radius: 8px; padding: 12px; margin-top: 12px; color: #fecaca; font-weight: bold; font-size: 14px; }
+    .btn-delete { background: none; border: none; color: #ef4444; font-size: 16px; cursor: pointer; }
+    .chk-box { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #cbd5e1; }
+    .chk-box input { width: 16px; height: 16px; }
+    .summary { background: #0369a1; border-radius: 12px; padding: 16px; margin-top: 16px; }
+    .summary h3 { color: white; margin-top: 0; }
+    .plan-stop { background: #1e293b; border-left: 4px solid #38bdf8; padding: 12px; margin-bottom: 8px; border-radius: 4px; }
+    .plan-title { font-weight: bold; color: #f8fafc; }
+    .plan-detail { font-size: 13px; color: #94a3b8; margin-top: 4px; }
   </style>
 </head>
 <body>
@@ -79,20 +43,20 @@ self.addEventListener('fetch', (e) => {
     <h2>🚛 Smart Fuel Route Planner</h2>
   </div>
 
-  <div class="card">
-    <h3>ਟਰੱਕ ਦੀ ਜਾਣਕਾਰੀ</h3>
+  <div class="card" style="margin-top: 14px;">
+    <h3>ਟ੍ਰੱਕ ਦੀ ਜਾਣਕਾਰੀ</h3>
     <div class="grid-2">
       <div>
         <label>ਕੁੱਲ ਟੈਂਕ (ਗੈਲਨ)</label>
-        <input type="number" id="tankCap" value="200">
+        <input type="number" id="tankSize" value="200">
       </div>
       <div>
         <label>ਮੌਜੂਦਾ ਤੇਲ (ਗੈਲਨ)</label>
-        <input type="number" id="startFuel" value="160">
+        <input type="number" id="currentFuel" value="160">
       </div>
       <div>
         <label>ਔਸਤ ਮਾਈਲੇਜ (MPG)</label>
-        <input type="number" id="truckMpg" value="6.5" step="0.1">
+        <input type="number" step="0.1" id="mpg" value="6.5">
       </div>
       <div>
         <label>ਰਿਜ਼ਰਵ ਲਿਮਿਟ (ਗੈਲਨ)</label>
@@ -102,26 +66,18 @@ self.addEventListener('fetch', (e) => {
   </div>
 
   <div class="card">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <h3>ਰਿਲੇਅ ਦੇ ਪੰਪ ਅਤੇ ਰੇਟ</h3>
-    </div>
-    
+    <h3>ਰਿਲੇਅ ਦੇ ਪੰਪ ਅਤੇ ਰੇਟ</h3>
     <div id="pumpContainer"></div>
-
-    <button class="btn btn-add" onclick="addPump()">+ ਨਵਾਂ ਪੰਪ ਸ਼ਾਮਲ ਕਰੋ</button>
-    <button class="btn btn-main" onclick="calculateFuelStops()">ਸਭ ਤੋਂ ਸਸਤਾ ਸਟਾਪ ਕੱਢੋ</button>
+    <button class="btn btn-add" onclick="addNewPump()">+ ਨਵਾਂ ਪੰਪ ਸ਼ਾਮਲ ਕਰੋ</button>
   </div>
 
-  <div class="card" id="resultsSection" style="display: none;">
-    <h3>ਤੇਲ ਪਵਾਉਣ ਦੀ ਯੋਜਨਾ</h3>
-    <div id="stopsOutput"></div>
-  </div>
+  <button class="btn btn-main" onclick="calculateFuelPlan()">ਸਭ ਤੋਂ ਸਸਤਾ ਪਲਾਨ ਬਣਾਓ</button>
+
+  <div id="planResult"></div>
 
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/sw.js');
-
-
     }
 
     let defaultPumps = [
@@ -139,144 +95,141 @@ self.addEventListener('fetch', (e) => {
 
     function renderPumps() {
       const container = document.getElementById('pumpContainer');
-      container.innerHTML = "";
-
+      container.innerHTML = '';
       pumps.forEach((p, idx) => {
-        const div = document.createElement('div');
-        div.className = 'pump-card';
-        div.innerHTML = `
-          <div class="pump-header">
-            <span class="pump-title">ਪੰਪ #${idx + 1}</span>
-            <button class="btn-delete" onclick="removePump(${idx})">✖</button>
-          </div>
-          <div class="grid-2">
-            <div>
-              <label>ਪੰਪ ਦਾ ਨਾਮ</label>
-              <input type="text" value="${p.name}" onchange="updatePump(${idx}, 'name', this.value)">
+        container.innerHTML += `
+          <div class="pump-card">
+            <div class="pump-header">
+              <span class="pump-title">${p.name || 'ਪੰਪ'}</span>
+              <button class="btn-delete" onclick="deletePump(${idx})">✕</button>
             </div>
-            <div>
-              <label>ਸ਼ਹਿਰ/ਸੂਬਾ (GPS)</label>
-              <input type="text" value="${p.loc}" onchange="updatePump(${idx}, 'loc', this.value)">
+            <div class="grid-2">
+              <div>
+                <label>ਪੰਪ ਦਾ ਨਾਮ / ਸ਼ਹਿਰ</label>
+                <input type="text" value="${p.name}" onchange="updatePump(${idx}, 'name', this.value)">
+              </div>
+              <div>
+                <label>ਲੋਕੇਸ਼ਨ / ਪਤਾ</label>
+                <input type="text" value="${p.loc}" onchange="updatePump(${idx}, 'loc', this.value)">
+              </div>
+              <div>
+                <label>ਮਾਈਲਜ਼ (ਸ਼ੁਰੂ ਤੋਂ ਦੂਰੀ)</label>
+                <input type="number" value="${p.miles}" onchange="updatePump(${idx}, 'miles', Number(this.value))">
+              </div>
+              <div>
+                <label>ਰੇਟ ($/Gal)</label>
+                <input type="number" step="0.01" value="${p.price}" onchange="updatePump(${idx}, 'price', Number(this.value))">
+              </div>
             </div>
-            <div>
-              <label>ਮੀਲ (Distance)</label>
-              <input type="number" value="${p.miles}" onchange="updatePump(${idx}, 'miles', parseFloat(this.value))">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top: 8px;">
+              <label class="chk-box">
+                <input type="checkbox" ${p.skip ? 'checked' : ''} onchange="updatePump(${idx}, 'skip', this.checked)">
+                ਛੱਡੋ (Skip this pump)
+              </label>
+              <a class="btn-nav" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.name + ' ' + p.loc)}" target="_blank">🗺️ ਨੈਵੀਗੇਟ</a>
             </div>
-            <div>
-              <label>ਅੱਜ ਦਾ ਰੇਟ ($)</label>
-              <input type="number" step="0.01" value="${p.price}" onchange="updatePump(${idx}, 'price', parseFloat(this.value))">
-            </div>
-          </div>
-          <div class="skip-box">
-            <input type="checkbox" id="skip_${idx}" ${p.skip ? 'checked' : ''} onchange="updatePump(${idx}, 'skip', this.checked)">
-            <label for="skip_${idx}" style="margin: 0; color: #fbbf24; cursor: pointer;">ਇਸ ਪੰਪ ਨੂੰ ਛੱਡੋ (Skip Stop)</label>
           </div>
         `;
-        container.appendChild(div);
       });
     }
 
-    function addPump() {
-      pumps.push({ name: "ਨਵਾਂ ਪੰਪ", loc: "", miles: 0, price: 0.00, skip: false });
+    function updatePump(idx, key, val) {
+      pumps[idx][key] = val;
+      savePumps();
+    }
+
+    function addNewPump() {
+      pumps.push({ name: "ਨਵਾਂ ਪੰਪ", loc: "", miles: 0, price: 3.00, skip: false });
       savePumps();
       renderPumps();
     }
 
-    function removePump(idx) {
+    function deletePump(idx) {
       pumps.splice(idx, 1);
       savePumps();
       renderPumps();
     }
 
-    function updatePump(idx, field, value) {
-      pumps[idx][field] = value;
-      savePumps();
-    }
+    function calculateFuelPlan() {
+      const tankSize = Number(document.getElementById('tankSize').value);
+      let curFuel = Number(document.getElementById('currentFuel').value);
+      const mpg = Number(document.getElementById('mpg').value);
+      const reserve = Number(document.getElementById('reserveFuel').value);
 
-    function calculateFuelStops() {
-      const tank = parseFloat(document.getElementById('tankCap').value) || 200;
-      const startFuel = parseFloat(document.getElementById('startFuel').value) || 160;
-      const mpg = parseFloat(document.getElementById('truckMpg').value) || 6.5;
-      const reserve = parseFloat(document.getElementById('reserveFuel').value) || 40;
+      const usableTank = tankSize - reserve;
+      let sorted = pumps.filter(p => !p.skip).sort((a,b) => a.miles - b.miles);
+      
+      let resDiv = document.getElementById('planResult');
+      resDiv.innerHTML = '';
 
-      let validPumps = [...pumps].sort((a, b) => a.miles - b.miles);
-      let currentMile = 0;
-      let currentFuel = startFuel;
-      let stops = [];
-      let alertMsg = "";
-
-      for (let i = 0; i < validPumps.length; i++) {
-        let p = validPumps[i];
-        let legDistance = p.miles - currentMile;
-        let fuelNeeded = legDistance / mpg;
-
-        if (currentFuel - fuelNeeded <= reserve) {
-          let candidates = validPumps.filter((item, index) => index <= i && item.miles > currentMile && !item.skip);
-
-          if (candidates.length === 0) {
-            alertMsg = "⚠️ ਚੇਤਾਵਨੀ: ਡੀਜ਼ਲ ਰਿਜ਼ਰਵ ਹੱਦ ਤੋਂ ਹੇਠਾਂ ਜਾ ਰਿਹਾ ਹੈ! ਕਿਸੇ ਪੰਪ ਤੋਂ Skip ਹਟਾਓ।";
-            break;
-          }
-
-          candidates.sort((a, b) => a.price - b.price);
-          let chosen = candidates[0];
-
-          let distanceToStop = chosen.miles - currentMile;
-          let arrivalFuel = currentFuel - (distanceToStop / mpg);
-
-          if (arrivalFuel < 0) {
-            alertMsg = "⚠️ ਖ਼ਤਰਾ: ਅਗਲੇ ਪੰਪ ਤੱਕ ਪਹੁੰਚਣ ਤੋਂ ਪਹਿਲਾਂ ਤੇਲ ਮੁੱਕ ਜਾਵੇਗਾ!";
-            break;
-          }
-
-          let gallonsToFill = Math.round(tank - arrivalFuel);
-
-          stops.push({
-            name: chosen.name,
-            loc: chosen.loc,
-            mile: chosen.miles,
-            price: chosen.price,
-            gallons: gallonsToFill
-          });
-
-          currentMile = chosen.miles;
-          currentFuel = tank;
-          i = validPumps.findIndex(x => x.name === chosen.name && x.miles === chosen.miles);
-        }
-      }
-
-      const resBox = document.getElementById('resultsSection');
-      const outBox = document.getElementById('stopsOutput');
-      resBox.style.display = "block";
-      outBox.innerHTML = "";
-
-      if (alertMsg) {
-        outBox.innerHTML += `<div class="warning">${alertMsg}</div>`;
-      }
-
-      if (stops.length === 0 && !alertMsg) {
-        outBox.innerHTML = `<div class="stop-card" style="background: #1e3a8a; border-left-color: #38bdf8;">ਤੁਹਾਡੇ ਮੌਜੂਦਾ ਤੇਲ ਮੁਤਾਬਕ ਟੈਂਕ ਸੁਰੱਖਿਅਤ ਹੈ। ਅਜੇ ਸਟਾਪ ਦੀ ਲੋੜ ਨਹੀਂ।</div>`;
+      if(sorted.length === 0) {
+        resDiv.innerHTML = '<p style="color:#ef4444; padding:10px;">ਕਿਰਪਾ ਕਰਕੇ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਪੰਪ ਸ਼ਾਮਲ ਕਰੋ।</p>';
         return;
       }
 
-      stops.forEach((s, i) => {
-        let mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.name + ' ' + s.loc)}`;
-        outBox.innerHTML += `
-          <div class="stop-card">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span class="stop-badge">ਸਟਾਪ #${i + 1}</span>
-              <span style="font-weight: bold; color: #a7f3d0; font-size: 16px;">$${s.price.toFixed(2)}/Gal</span>
+      let lastMile = 0;
+      let totalCost = 0;
+      let totalGals = 0;
+      let stopsHtml = '';
+
+      for(let i = 0; i < sorted.length; i++) {
+        let p = sorted[i];
+        let legMiles = p.miles - lastMile;
+        let fuelNeeded = legMiles / mpg;
+
+        if (curFuel < fuelNeeded) {
+          stopsHtml += `<div class="plan-stop" style="border-left-color: #ef4444;">
+            <div class="plan-title">⚠️ ਚੇਤਾਵਨੀ: ${p.name} ਤੱਕ ਤੇਲ ਨਹੀਂ ਪਹੁੰਚੇਗਾ!</div>
+            <div class="plan-detail">ਇਸ ਪੰਪ ਤੋਂ ਪਹਿਲਾਂ ਤੇਲ ਭਰਵਾਉਣਾ ਪਵੇਗਾ।</div>
+          </div>`;
+          break;
+        }
+
+        curFuel -= fuelNeeded;
+        lastMile = p.miles;
+
+        let shouldFill = false;
+        let fillAmt = 0;
+
+        let nextPump = sorted[i+1];
+        if (!nextPump) {
+          shouldFill = true;
+          fillAmt = tankSize - curFuel;
+        } else {
+          let milesToNext = nextPump.miles - p.miles;
+          let fuelToNext = milesToNext / mpg;
+          if (curFuel < fuelToNext || p.price <= nextPump.price) {
+            shouldFill = true;
+            fillAmt = tankSize - curFuel;
+          }
+        }
+
+        if (shouldFill && fillAmt > 5) {
+          let cost = fillAmt * p.price;
+          totalCost += cost;
+          totalGals += fillAmt;
+          curFuel += fillAmt;
+
+          stopsHtml += `
+            <div class="plan-stop">
+              <div class="plan-title">🛑 ਸਟਾਪ: ${p.name} (${p.loc})</div>
+              <div class="plan-detail">ਭਰਵਾਓ: <b>${fillAmt.toFixed(1)} ਗੈਲਨ</b> @ $${p.price.toFixed(2)}/gal</div>
+              <div class="plan-detail">ਅੰਦਾਜ਼ਨ ਖ਼ਰਚਾ: <b>$${cost.toFixed(2)}</b> (ਮਾਈਲ ਪੁਆਇੰਟ: ${p.miles})</div>
             </div>
-            <div style="margin: 8px 0; font-size: 15px;">
-              <b>${s.name}</b> (${s.loc})
-            </div>
-            <div style="font-size: 13px; color: #d1fae5; margin-bottom: 10px;">
-              📍 ਮੀਲ: <b>${s.mile}</b> | ⛽ ਡੀਜ਼ਲ ਪਵਾਓ: <b>${s.gallons} Gallons</b>
-            </div>
-            <a href="${mapLink}" target="_blank" class="btn-nav">🗺️ Google Maps 'ਤੇ ਨੈਵੀਗੇਸ਼ਨ ਸ਼ੁਰੂ ਕਰੋ</a>
+          `;
+        }
+      }
+
+      resDiv.innerHTML = `
+        <div class="summary">
+          <h3>ਸਭ ਤੋਂ ਸਸਤਾ ਰੂਟ ਪਲਾਨ</h3>
+          ${stopsHtml}
+          <div style="margin-top:12px; border-top:1px solid rgba(255,255,255,0.2); padding-top:8px;">
+            <div>ਕੁੱਲ ਤੇਲ: <b>${totalGals.toFixed(1)} ਗੈਲਨ</b></div>
+            <div style="font-size:18px; margin-top:4px;">ਕੁੱਲ ਅੰਦਾਜ਼ਨ ਖ਼ਰਚਾ: <b>$${totalCost.toFixed(2)}</b></div>
           </div>
-        `;
-      });
+        </div>
+      `;
     }
 
     renderPumps();
